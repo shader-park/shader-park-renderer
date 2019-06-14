@@ -3,10 +3,10 @@
   "version": "1.0",
   "manifest_version": 1,
 
-  "description": "start-lit-element",
+  "description": "Raymarched Text Renderer",
   "start_url": "index.html",
-  "name": "start-lit-element",
-  "short_name": "start-lit-el",
+  "name": "renderer",
+  "short_name": "renderer",
   "background_color": "#ffffff",
   "theme_color":"#ffffff",
   

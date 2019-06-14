@@ -1,10 +1,9 @@
 {
-  "shell": "src/start-lit-element.js",
+  "shell": "src/renderer.js",
   "entrypoint": "index.html",
-  "fragments": ["src/lazy-element.js"],
   "npm": true,
   "moduleResolution": "node",
-  "sources": ["src/start-lit-element.js", "manifest/**", "manifest.json", "package.json"],
+  "sources": ["src/renderer.js", "manifest/**", "manifest.json", "package.json"],
   "extraDependencies": [
     "robots.txt",
     "node_modules/@webcomponents/webcomponentsjs/**"
@@ -12,9 +11,15 @@
   "builds": [{
     "bundle": true,
     "js": { 
-      "minify": false,
+      "minify": true,
       "compile": "es5",
       "transformModulesToAmd": true
+    },
+    "css": {
+      "minify": true
+    },
+    "html": {
+      "minify": true
     },
     "addServiceWorker": true,
     "addPushManifest": true

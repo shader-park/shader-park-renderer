@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "start-lit-element"
+    "default": "las-renderer"
   }
 }

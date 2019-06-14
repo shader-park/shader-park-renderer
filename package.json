@@ -1,16 +1,17 @@
 {
-  "name": "start-lit-element",
+  "name": "renderer",
   "version": "1.0.0",
-  "description": "start-lit-element",
+  "description": "renderer",
   "repository": "https://github.com/PolymerLabs/start-lit-element.git",
-  "main": "start-lit-element.js",
+  "main": "renderer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "The Polymer Authors",
+  "author": "Torin Blankensmith",
   "license": "BSD-3-Clause",
   "dependencies": {
     "@webcomponents/webcomponentsjs": "latest",
-    "lit-element": "latest"
+    "lit-element": "latest",
+    "three": "^0.105.2"
   }
 }

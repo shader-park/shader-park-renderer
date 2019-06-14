@@ -23,16 +23,15 @@
       waitFor(cb){ addEventListener('WebComponentsReady', cb) }
     } 
     WebComponents.waitFor(async () => { 
-      import('./src/start-lit-element.js');
+      import('./src/renderer.js');
     });
   </script>
   
   <!-- Change stuff here for your app -->
-  <meta name="description" content="start-lit-element">
+  <meta name="Raymarched Text Renderer" content="renderer">
   <meta name="theme-color" content="#ffffff">
-  <title>start-lit-element</title>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAS Renderer</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <link rel="manifest" href="./manifest.json">
   <link rel="shortcut icon" href="/manifest/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -42,13 +41,11 @@
 
   <!-- 
     To configure starting state of the checkbox from markup: 
-    <start-lit-element pie="true"> 
+    <renderer pie="true"> 
   -->
   
-  <start-lit-element>
+  <las-renderer spSculptureId="-LMyIqwl4kMxIUlMoj0p">
     <!-- Placeholders to improve time to first paint -->
-    <h1>Start LitElement!</h1>
-    <p>Hello World from LitElement</p>
 
     <!-- Check for JavaScript -->
     <p id="jsyes"></p>
@@ -58,5 +55,5 @@
     <noscript>
       Could not render the custom element. Check that JavaScript is enabled.
     </noscript>
-  </start-lit-element>
+  </las-renderer>
 </body>

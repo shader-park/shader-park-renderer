@@ -8,19 +8,18 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-
-// Import LitElement base class and html helper function
+import {renderScene} from './there-scene.js'
 import { LitElement, html } from 'lit-element';
 
 export class StartLitElement extends LitElement {
+  
   /**
    * Define properties. Properties defined here will be automatically 
    * observed.
    */
   static get properties() {
     return {
-      message: { type: String },
-      pie: { type: Boolean }
+      spSculptureId: { type: String },
     };
   }
 
@@ -30,11 +29,9 @@ export class StartLitElement extends LitElement {
   constructor() {
     // Must call superconstructor first.
     super();
-
+    this.spSculptureId = '';
     // Initialize properties
-    this.loadComplete = false;
-    this.message = 'Hello World from LitElement';
-    this.pie = false;
+
   }
 
   /**
@@ -46,19 +43,12 @@ export class StartLitElement extends LitElement {
       <style>
         :host { display: block; }
         :host([hidden]) { display: none; }
+        canvas {
+          height: 100vh;
+        }
       </style>
-
-      <h1>Start LitElement!</h1>
-      <p>${this.message}</p>
-
-      <input name="myinput" id="myinput" 
-        type="checkbox"
-        ?checked="${this.pie}"
-        @change="${this.togglePie}">
-
-      <label for="myinput">I like pie.</label>
       
-      ${this.pie ? html`<lazy-element></lazy-element>` : html``}
+      <div id="container" style="height: 100vh"></div>
     `;
   }
 
@@ -68,39 +58,21 @@ export class StartLitElement extends LitElement {
    * - Focus the checkbox
    */
   firstUpdated() {
-    this.loadLazy();
-
-    const myInput = this.shadowRoot.getElementById('myinput');
-    myInput.focus();
-  }
-
-  /**
-   * Event handler. Gets called whenever the checkbox fires a `change` event.
-   * - Toggle whether to display <lazy-element>
-   * - Call a method to load the lazy element if necessary
-   */
-  togglePie(e) {
-    this.pie = !this.pie;
-    this.loadLazy();
-  }
-
-  /**
-   * If we need the lazy element && it hasn't already been loaded, 
-   * load it and remember that we loaded it.
-   */
-  async loadLazy() {
-    console.log('loadLazy');
-    if(this.pie && !this.loadComplete) {
-      return import('./lazy-element.js').then((LazyElement) => {
-        this.loadComplete = true;
-        console.log("LazyElement loaded");
-      }).catch((reason) => {
-        this.loadComplete = false;
-        console.log("LazyElement failed to load", reason);
-      });
+    console.log('spSculptureId', this.spSculptureId);
+    const canvasEl = this.shadowRoot.getElementById('container');
+    if (this.spSculptureId) {
+      console.log('getting Sculp');
+      fetch(`https://shader-park-core.firebaseio.com/sculptures/${this.spSculptureId}.json`)
+        .then(res => res.json())
+        .then(data => renderScene(canvasEl, data));
+    } else {
+      renderScene(canvasEl);
     }
   }
+
+  
+
 }
 
 // Register the element with the browser
-customElements.define('start-lit-element', StartLitElement);
+customElements.define('las-renderer', StartLitElement);
