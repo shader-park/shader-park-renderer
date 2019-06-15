@@ -12,6 +12,7 @@
   "dependencies": {
     "@webcomponents/webcomponentsjs": "latest",
     "lit-element": "latest",
+    "load-bmfont": "^1.4.0",
     "three": "^0.105.2"
   }
 }

@@ -10,6 +10,7 @@
 
 import {renderScene} from './there-scene.js'
 import { LitElement, html } from 'lit-element';
+// import {loadFonts} from './loadFont.js';
 
 export class StartLitElement extends LitElement {
   
@@ -43,6 +44,7 @@ export class StartLitElement extends LitElement {
       <style>
         :host { display: block; }
         :host([hidden]) { display: none; }
+
         canvas {
           height: 100vh;
         }
@@ -61,7 +63,7 @@ export class StartLitElement extends LitElement {
     console.log('spSculptureId', this.spSculptureId);
     const canvasEl = this.shadowRoot.getElementById('container');
     if (this.spSculptureId) {
-      console.log('getting Sculp');
+      console.log('getting SC')
       fetch(`https://shader-park-core.firebaseio.com/sculptures/${this.spSculptureId}.json`)
         .then(res => res.json())
         .then(data => renderScene(canvasEl, data));

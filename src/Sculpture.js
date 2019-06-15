@@ -3,10 +3,10 @@ import { defaultVertexSource, sculptureStarterCode, fragFooter} from './core-gls
 import { sketch } from './sketch.js'
 
 export class Sculpture {
-    constructor(size, sculptureData) {
+    constructor(size, fontTexture, sculptureData) {
         this.size = size
         this.vertexShader = defaultVertexSource;
-        
+        this.fontTexture = fontTexture;
         // this.geometry = new THREE.BoxGeometry(size, size, size);
         let fragSource = sculptureStarterCode;
         if(sculptureData) {
@@ -16,7 +16,8 @@ export class Sculpture {
         }
         this.fragmentShader = fragSource;
         fragSource += fragFooter;
-        this.geometry = new THREE.SphereBufferGeometry(size, 400, 400);
+        this.geometry = new THREE.BoxBufferGeometry(1.0, 1.0, 1.0);
+        // this.geometry = new THREE.SphereBufferGeometry(size, 400, 400);
         this.mesh = new THREE.Mesh(
             this.geometry,
             this.generateMaterial(defaultVertexSource, fragSource)
@@ -51,7 +52,8 @@ export class Sculpture {
           stepSize: { value: 0.8 },
           size: { value: this.size },
           raySize: { value: this.raySize },
-          minStep: { value: this.minStep }
+          minStep: { value: this.minStep },
+          msdf: { value: this.fontTexture }
         },
         vertexShader,
         fragmentShader: fragmentShader,

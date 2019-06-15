@@ -5,13 +5,14 @@ import { Sculpture } from './Sculpture.js'
 export const renderScene = (container, sculptureData) => {
     // const container = document.querySelector('.container');
     const scene = new THREE.Scene();
-
+    const texture = new THREE.TextureLoader().load('fonts/msdf.png');
     const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 1, 1000);
-    camera.position.set(0, 0, 5);
+    camera.position.set(0, 0, 2);
 
     const raycaster = new THREE.Raycaster();
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // renderer.setClearColor('0x000000');
     // render.setClearColor('0x000000');
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -30,7 +31,7 @@ export const renderScene = (container, sculptureData) => {
     document.addEventListener('mousemove', onDocumentMouseMove, false);
 
     let objectsToRaycast = [];
-    let sculpture = new Sculpture(1, sculptureData);
+    let sculpture = new Sculpture(1, texture, sculptureData);
     scene.add(sculpture.mesh);
     objectsToRaycast.push(sculpture.mesh);
 
