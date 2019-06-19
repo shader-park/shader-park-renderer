@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "las-renderer"
+    "default": "sp-renderer"
   }
 }
