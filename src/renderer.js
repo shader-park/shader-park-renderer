@@ -10,6 +10,8 @@
 
 import {renderScene} from './there-scene.js'
 import { LitElement, html } from 'lit-element';
+// import * as spcore from 'sculpture-park-core';
+// console.log('spcore', spcore);
 // import {loadFonts} from './loadFont.js';
 
 export class StartLitElement extends LitElement {
@@ -21,6 +23,8 @@ export class StartLitElement extends LitElement {
   static get properties() {
     return {
       spSculptureId: { type: String },
+      width: { type: String },
+      height: { type: String },
     };
   }
 
@@ -31,6 +35,8 @@ export class StartLitElement extends LitElement {
     // Must call superconstructor first.
     super();
     this.spSculptureId = '';
+    this.width = '100vw';
+    this.height = '100vh';
     // Initialize properties
 
   }
@@ -46,11 +52,12 @@ export class StartLitElement extends LitElement {
         :host([hidden]) { display: none; }
 
         canvas {
-          height: 100vh;
+          width: ${this.width};
+          height: ${this.height};
         }
       </style>
       
-      <div id="container" style="height: 100vh"></div>
+      <div id="container" style="width: ${this.width}; height: ${this.height} "></div>
     `;
   }
 
@@ -77,4 +84,4 @@ export class StartLitElement extends LitElement {
 }
 
 // Register the element with the browser
-customElements.define('las-renderer', StartLitElement);
+customElements.define('sp-renderer', StartLitElement);
