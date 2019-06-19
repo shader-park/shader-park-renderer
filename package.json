@@ -13,6 +13,7 @@
     "@webcomponents/webcomponentsjs": "latest",
     "lit-element": "latest",
     "load-bmfont": "^1.4.0",
+    "sculpture-park-core": "github:bnanner/sculpture-park-core",
     "three": "^0.105.2"
   }
 }
