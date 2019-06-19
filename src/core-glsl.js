@@ -540,6 +540,55 @@ float occlusion(vec3 p,vec3 n) {
 }
 `;
 
+export const fragFooter1 = `
+// For advanced users //
+
+vec3 rayMarchColor(vec2 uv) {
+    vec3 rayOrigin = worldPos.xyz-sculptureCenter;
+    rayOrigin += vec3(uv, 0.);
+	vec3 rayDirection = getRayDirection();
+	rayOrigin -= rayDirection*2.0;
+    float t = intersect(rayOrigin, rayDirection, stepSize);
+    
+	if(t < 2.5) {
+		vec3 p = (rayOrigin + rayDirection*t);
+		//vec4 sp = projectionMatrix*viewMatrix*vec4(p,1.0);
+		vec3 normal = calcNormal(p);
+        vec3 c = shade(p, normal);
+        return c;
+    } else {
+        //discard;
+    }
+}
+
+void main() {    
+        vec2 tex = vUv;
+        //vec2 uv = vUv;
+        msdfTexture = texture2D(msdf, vUv).rgb;
+        vec3 rayOrigin = worldPos.xyz-sculptureCenter;
+        vec3 rayDirection = getRayDirection();
+        rayOrigin -= rayDirection*2.0;
+        vec3 p = (rayOrigin + rayDirection);
+        vec2 uv = worldPos.xy;
+        // maximum aberration in number of pixels at uv.x == 0 or 1 (left or right edge)
+        const float redAberration = 0.01;
+        const float greenAberration = 0.01;
+        const float blueAberration = .001;
+
+        float pctEffect = (uv.x ) * 1.0;
+
+        vec3 aberration = vec3(redAberration / uv.x, greenAberration / uv.x, blueAberration / uv.x);
+        aberration *= pctEffect;
+
+        vec3 col;
+        col.r = rayMarchColor(vec2(uv.x+aberration.x,uv.y)).x;
+        col.g = rayMarchColor(vec2(uv.x+aberration.y,uv.y)).y;
+        col.b = rayMarchColor(vec2(uv.x+aberration.z,uv.y)).z;
+		gl_FragColor = vec4(col, opacity);
+        
+}
+`;
+
 export const fragFooter = `
 // For advanced users //
 void main() {
