@@ -5,7 +5,7 @@ import { Sculpture } from './Sculpture.js'
 export const renderScene = (container, sculptureData) => {
     // const container = document.querySelector('.container');
     const scene = new THREE.Scene();
-    const texture = new THREE.TextureLoader().load('fonts/msdf.png');
+    const texture = new THREE.TextureLoader().load('fonts/msdf3.png');
     const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 1, 1000);
     camera.position.set(0, 0, 2);
 
