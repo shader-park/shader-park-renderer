@@ -3,7 +3,7 @@
   "entrypoint": "index.html",
   "npm": true,
   "moduleResolution": "node",
-  "sources": ["src/renderer.js", "manifest/**", "manifest.json", "package.json"],
+  "sources": ["src/renderer.js", "manifest/**", "manifest.json", "package.json", "fonts/**"],
   "extraDependencies": [
     "robots.txt",
     "node_modules/@webcomponents/webcomponentsjs/**"
@@ -13,7 +13,7 @@
     "js": { 
       "minify": true,
       "compile": "es5",
-      "transformModulesToAmd": true
+      "transformModulesToAmd": false
     },
     "css": {
       "minify": true
