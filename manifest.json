@@ -3,7 +3,7 @@
   "version": "1.0",
   "manifest_version": 1,
 
-  "description": "Raymarched Text Renderer",
+  "description": "Sculpture Park Renderer",
   "start_url": "index.html",
   "name": "renderer",
   "short_name": "renderer",
