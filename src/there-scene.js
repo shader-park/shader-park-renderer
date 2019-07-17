@@ -30,6 +30,8 @@ export const renderScene = (container, sculptureData) => {
     // container.addEventListener('mousedown', this.onMouseDown, false);
     // container.addEventListener('mouseup', this.onMouseUp, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
+    document.addEventListener("touchstart", onTouchMove, false);
+    document.addEventListener("touchmove", onTouchMove, false);
 
     if (sculptureData.type === "js") {
         let source = sourceGenerator(sculptureData.shaderSource);
@@ -54,7 +56,7 @@ export const renderScene = (container, sculptureData) => {
     renderer.setAnimationLoop((time) => renderScene(time));
 
     function renderScene(time) {
-        raycaster.setFromCamera(mouse, camera);
+        // raycaster.setFromCamera(mouse, camera);
         // let intersects = raycaster.intersectObjects(objectsToRaycast);
         // if (intersects.length > 0) {
         //     const firstIntersect = intersects[0].object;
@@ -74,7 +76,7 @@ export const renderScene = (container, sculptureData) => {
         // }
 
         // controls.update();
-        sculpture.update(time);
+        sculpture.update({time, mouse});
         renderer.render(scene, camera);
     }
 
@@ -88,5 +90,21 @@ export const renderScene = (container, sculptureData) => {
         event.preventDefault();
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    function onDocumentMouseMove(event) {
+        event.preventDefault();
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    function onTouchMove(event) {
+
+        var pointer = event.changedTouches ? event.changedTouches[0] : event;
+
+        var rect = container.getBoundingClientRect();
+        mouse.x = (pointer.clientX - rect.left) / rect.width * 2 - 1;
+        mouse.y = - (pointer.clientY - rect.top) / rect.height * 2 + 1;
+
     }
 }

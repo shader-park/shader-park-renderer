@@ -73,8 +73,10 @@ export class Sculpture {
         this.mesh.material = this.generateMaterial(this.vertexShader, this.fragmentShader);
     }
 
-    update(time) {
+    update(payload) {
+        let { time, mouse} = payload;
         this.mesh.material.uniforms['time'].value = time * 0.001;
+        this.mesh.material.uniforms['mouse'].value = [mouse.x, mouse.y, 1.0];
         this.mesh.material.uniforms['sculptureCenter'].value = this.mesh.position;
         this.mesh.material.uniforms['opacity'].value = this.opacity;
         this.mesh.material.uniforms['stepSize'].value = this.stepSize;
