@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { defaultVertexSource, sculptureStarterCode, fragFooter} from './core-glsl.js'
+import { defaultVertexSource, sculptureStarterCode, fragFooter } from 'sculpture-park-core'
 import { sketch } from './sketch.js'
 
 export class Sculpture {

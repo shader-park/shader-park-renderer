@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 // import * as OrbitControls from './OrbitControls.js'
 import { Sculpture } from './Sculpture.js'
+import { sourceGenerator } from 'sculpture-park-core'
 
 export const renderScene = (container, sculptureData) => {
     // const container = document.querySelector('.container');
@@ -30,6 +31,11 @@ export const renderScene = (container, sculptureData) => {
     // container.addEventListener('mouseup', this.onMouseUp, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
 
+    if (sculptureData.type === "js") {
+        let source = sourceGenerator(sculptureData.shaderSource);
+        sculptureData.shaderSource = source.geoGLSL + source.colorGLSL;
+    }
+    
     let objectsToRaycast = [];
     let sculpture = new Sculpture(1, texture, sculptureData);
     scene.add(sculpture.mesh);
